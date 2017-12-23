@@ -10,25 +10,15 @@
 
     <body>
         <div class="container">
-           <h3><a href="/">Contacts List</a></h3>
+           <h3><a href="/">URL List</a></h3>
 
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul id="groupList" class="nav navbar-nav">
-                            <li><button type="button" id="add_contact" class="btn btn-default navbar-btn">Add Contact</button></li>
-                            <li><button type="button" id="add_group" class="btn btn-default navbar-btn">Add Group</button></li>
-                            <li><button type="button" id="delete_contact" class="btn btn-default navbar-btn">Delete Contact</button></li>
-                            <%--&lt;%&ndash;<li class="dropdown">&ndash;%&gt;--%>
-                                <%--&lt;%&ndash;<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Groups <span class="caret"></span></a>&ndash;%&gt;--%>
-                                <%--&lt;%&ndash;<ul class="dropdown-menu">&ndash;%&gt;--%>
-                                    <%--&lt;%&ndash;<li><a href="/">Default</a></li>&ndash;%&gt;--%>
-                                    <%--&lt;%&ndash;<c:forEach items="${groups}" var="group">&ndash;%&gt;--%>
-                                        <%--&lt;%&ndash;<li><a href="/group/${group.id}">${group.name}</a></li>&ndash;%&gt;--%>
-                                    <%--</c:forEach>--%>
-                                </ul>
-                            </li>
+                            <li><button type="button" id="add_url" class="btn btn-default navbar-btn">Add url</button></li>
+                            <li><button type="button" id="delete_url" class="btn btn-default navbar-btn">Delete url</button></li>
                         </ul>
                         <form class="navbar-form navbar-left" role="search" action="/search" method="post">
                             <div class="form-group">
@@ -44,11 +34,10 @@
                 <thead>
                 <tr>
                     <td></td>
-                    <td><b>Name</b></td>
-                    <td><b>Surname</b></td>
-                    <td><b>Phone</b></td>
-                    <td><b>E-mail</b></td>
-                    <td><b>Group</b></td>
+                    <td><b>URL</b></td>
+                    <td><b>URL status</b></td>
+                    <td><b>Description</b></td>
+                    <td><b></b></td>
                 </tr>
                 </thead>
                 <c:forEach items="${urlResults}" var="urlResult">
@@ -57,16 +46,7 @@
                         <td>${urlResult.url}</td>
                         <td>${urlResult.status}</td>
                         <td>${urlResult.description}</td>
-                        <td>${urlResult.status}</td>
-                        <td>${urlResult.url}</td>
-                        <%--<c:choose>--%>
-                            <%--<c:when test="${contact.group ne null}">--%>
-                                <%--<td>${contact.group.name}</td>--%>
-                            <%--</c:when>--%>
-                            <%--<c:otherwise>--%>
-                                <%--<td>Default</td>--%>
-                            <%--</c:otherwise>--%>
-                        <%--</c:choose>--%>
+                        <td><button type="button" id="stop_${urlResult.url}" class="btn btn-default navbar-btn">Stop</button></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -87,16 +67,16 @@
                 window.location.href='/urlConfig_add_page';
             });
 
-            $('#add_group').click(function(){
-                window.location.href='/group_add_page';
-            });
+            // $('#add_group').click(function(){
+            //     window.location.href='/group_add_page';
+            // });
 
-            $('#delete_contact').click(function(){
+            $('#delete_url').click(function(){
                 var data = { 'toDelete[]' : []};
                 $(":checked").each(function() {
                     data['toDelete[]'].push($(this).val());
                 });
-                $.post("/contact/delete", data, function(data, status) {
+                $.post("/url/delete", data, function(data, status) {
                     window.location.reload();
                 });
             });
