@@ -10,7 +10,6 @@ public class UrlConfig {
     private int cooldown;
     private int responseTimeOK;
     private int responseTimeWARNING;
-    private int responseTimeCRITICAL;
     private int expectedResponseCode;
     private int minResponseLength;
     private int maxResponseLength;
@@ -24,7 +23,6 @@ public class UrlConfig {
         this.cooldown = cooldown;
         this.responseTimeOK = responseTimeOK;
         this.responseTimeWARNING = responseTimeWARNING;
-        this.responseTimeCRITICAL = responseTimeCRITICAL;
         this.expectedResponseCode = expectedResponseCode;
         this.minResponseLength = minResponseLength;
         this.maxResponseLength = maxResponseLength;
@@ -55,13 +53,6 @@ public class UrlConfig {
         this.responseTimeOK = responseTimeOK;
     }
 
-    public int getResponseTimeCRITICAL() {
-        return responseTimeCRITICAL;
-    }
-
-    public void setResponseTimeCRITICAL(int responseTimeCRITICAL) {
-        this.responseTimeCRITICAL = responseTimeCRITICAL;
-    }
 
     public int getResponseTimeWARNING() {
         return responseTimeWARNING;
@@ -110,7 +101,6 @@ public class UrlConfig {
                 ", cooldown=" + cooldown +
                 ", responseTimeOK=" + responseTimeOK +
                 ", responseTimeWARNING=" + responseTimeWARNING +
-                ", responseTimeCRITICAL=" + responseTimeCRITICAL +
                 ", expectedResponseCode=" + expectedResponseCode +
                 ", minResponseLength=" + minResponseLength +
                 ", maxResponseLength=" + maxResponseLength +

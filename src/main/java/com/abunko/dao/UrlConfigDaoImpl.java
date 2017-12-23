@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.util.List;
 
@@ -16,7 +17,10 @@ public class UrlConfigDaoImpl implements UrlConfigDao {
 
     @Override
     public void add(UrlConfig urlConfig) {
-        entityManager.merge(urlConfig);
+        Query query = entityManager.createQuery("insert into UrlConfig (url, cooldown, expectedResponseCode, maxResponseLength, minResponseLength, responseTimeOK, responseTimeWARNING, substring) values ( "+ urlConfig.getUrl() + ", " + urlConfig.getCooldown() +
+                ", " + urlConfig.getResponseTimeOK() + ", " + urlConfig.getResponseTimeWARNING() + ", " + urlConfig.getExpectedResponseCode() +
+                ", " + urlConfig.getMinResponseLength() + ", " + urlConfig.getMaxResponseLength() + ", " + urlConfig.getSubstring() + ")");
+   //     entityManager.persist(urlConfig);
     }
 
     @Override
@@ -25,9 +29,4 @@ public class UrlConfigDaoImpl implements UrlConfigDao {
         return query.getResultList();
     }
 
-    @Override
-    public Long count() {
-           TypedQuery<Long> query = entityManager.createQuery("SELECT COUNT(c) FROM UrlConfig c", Long.class);
-            return query.getSingleResult();
-        }
 }

@@ -7,5 +7,4 @@ import java.util.List;
 public interface UrlConfigDao {
     public void add(UrlConfig urlConfig);
     public List<UrlConfig> getAll();
-    Long count();
 }

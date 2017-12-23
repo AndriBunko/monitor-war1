@@ -51,14 +51,14 @@
                     <td><b>Group</b></td>
                 </tr>
                 </thead>
-                <c:forEach items="${urlConfigs}" var="urlConfig">
+                <c:forEach items="${urlResults}" var="urlResult">
                     <tr>
-                        <td><input type="checkbox" name="toDelete[]" value="${urlConfig.url}" id="checkbox_${urlConfig.url}"/></td>
-                        <td>${urlConfig.url}</td>
-                        <td>${urlConfig.substring}</td>
-                        <td>${urlConfig.responseTimeOK}</td>
-                        <td>${urlConfig.responseTimeWARNING}</td>
-                        <td>${urlConfig.responseTimeWARNING}</td>
+                        <td><input type="checkbox" name="toDelete[]" value="${urlResult.url}" id="checkbox_${urlResult.url}"/></td>
+                        <td>${urlResult.url}</td>
+                        <td>${urlResult.status}</td>
+                        <td>${urlResult.description}</td>
+                        <td>${urlResult.status}</td>
+                        <td>${urlResult.url}</td>
                         <%--<c:choose>--%>
                             <%--<c:when test="${contact.group ne null}">--%>
                                 <%--<td>${contact.group.name}</td>--%>

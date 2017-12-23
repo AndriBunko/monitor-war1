@@ -16,13 +16,13 @@ public class Response {
         Date date = new Date();
         long time = System.currentTimeMillis();
         HttpURLConnection con = (HttpURLConnection) new URL(urlConfig.getUrl()).openConnection();
-        con.connect();
+        //con.connect();
         requestParam.setResponseTime((System.currentTimeMillis() - time));
         requestParam.setUrl(urlConfig.getUrl());
         requestParam.setResponseCode(con.getResponseCode());
         requestParam.setResponseLength(con.getContentLength());
         con.disconnect();
-      //  System.out.println(requestParam);
+        System.out.println(requestParam);
         return requestParam;
         }
 

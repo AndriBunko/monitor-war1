@@ -1,19 +1,23 @@
 package com.abunko.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
+@Entity
 public class ResultOfAnalysisUrl {
+    @Id
     private String url;
+    private String description;
+    @Enumerated(EnumType.STRING)
     private Status status;
-    private String Description;
+
 
     public ResultOfAnalysisUrl() {
     }
 
-    public ResultOfAnalysisUrl(String url, Status status, String description) {
+    public ResultOfAnalysisUrl(String url, String description, String status) {
         this.url = url;
-        this.status = status;
-        Description = description;
+        this.description = description;
+        this.status = Status.valueOf(status);
     }
 
     public String getUrl() {
@@ -28,15 +32,24 @@ public class ResultOfAnalysisUrl {
         return status;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(String status) {
+        this.status = Status.valueOf(status);
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public void setDescription(String description) {
-        Description = description;
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "ResultOfAnalysisUrl{" +
+                "url='" + url + '\'' +
+                ", status=" + status +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
