@@ -2,6 +2,7 @@ package com.abunko.dao;
 
 import com.abunko.model.ResultOfAnalysisUrl;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -14,12 +15,11 @@ public class ResultOfAnalysisUrlDaoImpl implements ResultOfAnalysisUrlDao {
     @PersistenceContext
     EntityManager entityManager;
 
+    @Transactional
     public void add(ResultOfAnalysisUrl analysisUrl){
-//        Query query = entityManager.createNativeQuery("INSERT INTO ResultOfAnalysisUrl (url, description, status)  VALUES ( '" + analysisUrl.getUrl() +
-//                "', '"+ analysisUrl.getDescription() + "', '" + analysisUrl.getStatus() + "')");
-//                //  query.executeUpdate();
-        entityManager.merge(analysisUrl);
+        entityManager.persist(analysisUrl);
     }
+
 
     @Override
     public List<ResultOfAnalysisUrl> list() {
@@ -27,20 +27,26 @@ public class ResultOfAnalysisUrlDaoImpl implements ResultOfAnalysisUrlDao {
         return query.getResultList();
     }
 
-    @Override
+    @Transactional
     public ResultOfAnalysisUrl getByUrl(String url) {
         TypedQuery<ResultOfAnalysisUrl> query = entityManager.createQuery("SELECT c FROM ResultOfAnalysisUrl c WHERE c.url LIKE :url", ResultOfAnalysisUrl.class);
-        return null;
+        return query.getSingleResult();
     }
 
-    @Override
     public void delete(String url) {
-
+            ResultOfAnalysisUrl result = entityManager.getReference(ResultOfAnalysisUrl.class, url);
+            entityManager.remove(result);
     }
 
     @Override
     public Long count() {
         TypedQuery<Long> query = entityManager.createQuery("SELECT COUNT(c) FROM UrlConfig c", Long.class);
         return query.getSingleResult();
+    }
+
+
+    @Transactional
+    public void update(ResultOfAnalysisUrl analysisUrl) {
+        entityManager.merge(analysisUrl);
     }
 }

@@ -14,18 +14,17 @@
 
             <nav class="navbar navbar-default">
                 <div class="container-fluid">
-                    <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul id="groupList" class="nav navbar-nav">
                             <li><button type="button" id="add_url" class="btn btn-default navbar-btn">Add url</button></li>
                             <li><button type="button" id="delete_url" class="btn btn-default navbar-btn">Delete url</button></li>
                         </ul>
-                        <form class="navbar-form navbar-left" role="search" action="/search" method="post">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="pattern" placeholder="Search">
-                            </div>
-                            <button type="submit" class="btn btn-default">Submit</button>
-                        </form>
+                        <%--<form class="navbar-form navbar-left" role="search" action="/search" method="post">--%>
+                            <%--<div class="form-group">--%>
+                                <%--<input type="text" class="form-control" name="pattern" placeholder="Search">--%>
+                            <%--</div>--%>
+                            <%--<button type="submit" class="btn btn-default">Submit</button>--%>
+                        <%--</form>--%>
                     </div><!-- /.navbar-collapse -->
                 </div><!-- /.container-fluid -->
             </nav>
@@ -41,12 +40,14 @@
                 </tr>
                 </thead>
                 <c:forEach items="${urlResults}" var="urlResult">
-                    <tr>
+                    <tr class="${urlResult.status}">
                         <td><input type="checkbox" name="toDelete[]" value="${urlResult.url}" id="checkbox_${urlResult.url}"/></td>
                         <td>${urlResult.url}</td>
                         <td>${urlResult.status}</td>
                         <td>${urlResult.description}</td>
-                        <td><button type="button" id="stop_${urlResult.url}" class="btn btn-default navbar-btn">Stop</button></td>
+                        <%--<button type="button" id="stop_url_${urlResult.url}" class="btn btn-default navbar-btn" value="${urlResult.url}">Stop_url</button>--%>
+                        <td><input type="submit"  class="btn btn-default navbar-btn" value="Stop" onclick="window.location='/stop/${urlResult.url}'"></td>
+                        <td><input type="submit"  class="btn btn-default navbar-btn" value="Run" onclick="window.location='/run/${urlResult.url}'"></input></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -61,15 +62,12 @@
         </div>
 
         <script>
+
             $('.dropdown-toggle').dropdown();
 
-            $('#add_contact').click(function(){
+            $('#add_url').click(function(){
                 window.location.href='/urlConfig_add_page';
             });
-
-            // $('#add_group').click(function(){
-            //     window.location.href='/group_add_page';
-            // });
 
             $('#delete_url').click(function(){
                 var data = { 'toDelete[]' : []};
@@ -81,5 +79,25 @@
                 });
             });
         </script>
+
+        <%--<script>--%>
+            <%--document.addEventListener("DOMContentLoaded", function(){--%>
+                <%--var warningAudio = document.querySelector('.WARNING');--%>
+                <%--var criticalAudio = document.querySelector('.CRITICAL');--%>
+
+                <%--warningAudio.addEventListener('mouseover', function(){--%>
+                    <%--var playAudio = document.createElement('audio');--%>
+                    <%--playAudio.setAttribute('src', 'resources\\CRITICAL.mp3');--%>
+                    <%--playAudio.play();--%>
+                <%--})--%>
+
+                <%--criticalAudio.addEventListener('mouseover', function(){--%>
+                    <%--var playAudio = document.createElement('audio');--%>
+                    <%--playAudio.setAttribute('src', '/static/CRITICAL.mp3');--%>
+                    <%--playAudio.play();--%>
+
+                <%--})--%>
+            <%--});--%>
+        <%--</script>--%>
     </body>
 </html>

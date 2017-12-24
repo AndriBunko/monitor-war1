@@ -10,21 +10,15 @@
         <div class="container">
             <form role="form" class="form-horizontal" action="/urlConfig/add" method="post">
                         <h3>New URL configuration</h3>
-                        <%--<select class="selectpicker form-control form-group" name="group">--%>
-                            <%--<option value="-1">Default</option>--%>
-                            <%--<c:forEach items="${groups}" var="group">--%>
-                                <%--<option value="${group.id}">${group.name}</option>--%>
-                            <%--</c:forEach>--%>
-                        <%--</select>--%>
+
                         <input class="form-control form-group" type="text" name="url" placeholder="Url">
-                        <input class="form-control form-group" type="number" name="timeOk" placeholder="timeOk">
-                        <input class="form-control form-group" type="number" name="timeWarning" placeholder="timeWarning">
-                        <input class="form-control form-group" type="number" name="timeCritical" placeholder="timeCritical">
+                        <input class="form-control form-group" type="number" name="timeOk" placeholder="respons time Ok">
+                        <input class="form-control form-group" type="number" name="timeWarning" placeholder="respons time Warning">
                         <input class="form-control form-group" type="text" name="substring" placeholder="substring">
-                        <input class="form-control form-group" type="number" name="maxResponseLength" placeholder="maxResponseLength">
-                        <input class="form-control form-group" type="number" name="minResponseLength" placeholder="minResponseLength">
-                        <input class="form-control form-group" type="number" name="responseCode" placeholder="Response code">
-                        <input class="form-control form-group" type="number" name="cooldown" placeholder="cooldown">
+                        <input class="form-control form-group" type="number" name="maxResponseLength" placeholder="max response length in byte">
+                        <input class="form-control form-group" type="number" name="minResponseLength" placeholder="min esponse length in byte">
+                        <input class="form-control form-group" type="number" name="responseCode" placeholder="expected response code">
+                        <input class="form-control form-group" type="number" name="repeatFrequency" placeholder="repeat frequency in second">
                     <input type="submit" class="btn btn-primary" value="Add">
             </form>
         </div>

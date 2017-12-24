@@ -4,7 +4,7 @@ import com.abunko.model.*;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UrlRequestParamAnalizer implements UrlAnalizer{
+ class UrlRequestParamAnalizer implements UrlAnalizer{
 
     private UrlRequestParam requestParam;
     private UrlConfig config;
@@ -19,27 +19,35 @@ public class UrlRequestParamAnalizer implements UrlAnalizer{
 
     @Override
     public ResultOfAnalysisUrl analize( ) {
-        ResultOfAnalysisUrl result = new ResultOfAnalysisUrl(config.getUrl(), "all ok", Status.OK.toString());
+        ResultOfAnalysisUrl result = new ResultOfAnalysisUrl();
+        result.setDescription("all ok");
+        result.setUrl(config.getUrl());
+        result.setStatus(Status.OK);
         String description;
         while (true) {
             if (responseCodeAnalizer() == Status.CRITICAL) {
-                result.setStatus(Status.CRITICAL.toString());
+                result.setStatus(Status.CRITICAL);
                 result.setDescription("not expected response code");
                 break;
             }
             if (responseLengthAnalizer() == Status.CRITICAL) {
-                result.setStatus(Status.CRITICAL.toString());
+                result.setStatus(Status.CRITICAL);
                 result.setDescription("critical respons length");
                 break;
             }
             if (responsTimeAnalizer() == Status.CRITICAL) {
-                result.setStatus(Status.CRITICAL.toString());
+                result.setStatus(Status.CRITICAL);
                 result.setDescription("critical respons time");
                 break;
             }
             if (responsTimeAnalizer() == Status.WARNING) {
-                result.setStatus(Status.WARNING.toString());
+                result.setStatus(Status.WARNING);
                 result.setDescription("big respons time");
+                break;
+            }
+            if (substringAnalizer() == Status.WARNING) {
+                result.setStatus(Status.WARNING );
+                result.setDescription("does not contain substrings");
                 break;
             }
             break;
@@ -64,6 +72,11 @@ public class UrlRequestParamAnalizer implements UrlAnalizer{
         return status;
     }
 
+    private Status substringAnalizer(){
+        Status status =  requestParam.getStr().contains(config.getSubstring()) ? Status.OK : Status.CRITICAL;
+        return status;
+    }
+
     public UrlRequestParam getRequestParam() {
         return requestParam;
     }
@@ -79,5 +92,5 @@ public class UrlRequestParamAnalizer implements UrlAnalizer{
     public void setUrlConfig(UrlConfig config) {
         this.config = config;
     }
-}  //Getting the response substring
-//        answer.setSubstringEntry(response.toString().contains(question.getSubstring()) ? Status.OK : Status.CRITICAL);
+
+}

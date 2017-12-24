@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class UrlConfig {
     @Id
     private String url;
-    private int cooldown;
+    private int repeatFrequency;
     private int responseTimeOK;
     private int responseTimeWARNING;
     private int expectedResponseCode;
@@ -18,9 +18,9 @@ public class UrlConfig {
     public UrlConfig() {
     }
 
-    public UrlConfig(String url, int cooldown, int responseTimeOK, int responseTimeWARNING, int responseTimeCRITICAL, int expectedResponseCode, int minResponseLength, int maxResponseLength, String substring) {
+    public UrlConfig(String url, int repeatFrequency, int responseTimeOK, int responseTimeWARNING, int responseTimeCRITICAL, int expectedResponseCode, int minResponseLength, int maxResponseLength, String substring) {
         this.url = url;
-        this.cooldown = cooldown;
+        this.repeatFrequency = repeatFrequency;
         this.responseTimeOK = responseTimeOK;
         this.responseTimeWARNING = responseTimeWARNING;
         this.expectedResponseCode = expectedResponseCode;
@@ -37,12 +37,12 @@ public class UrlConfig {
         this.url = url;
     }
 
-    public int getCooldown() {
-        return cooldown;
+    public int getRepeatFrequency() {
+        return repeatFrequency;
     }
 
-    public void setCooldown(int cooldown) {
-        this.cooldown = cooldown;
+    public void setRepeatFrequency(int repeatFrequency) {
+        this.repeatFrequency = repeatFrequency;
     }
 
     public int getResponseTimeOK() {
@@ -98,7 +98,7 @@ public class UrlConfig {
     public String toString() {
         return "UrlConfig{" +
                 "url='" + url + '\'' +
-                ", cooldown=" + cooldown +
+                ", repeatFrequency=" + repeatFrequency +
                 ", responseTimeOK=" + responseTimeOK +
                 ", responseTimeWARNING=" + responseTimeWARNING +
                 ", expectedResponseCode=" + expectedResponseCode +
@@ -110,7 +110,7 @@ public class UrlConfig {
 
 /*    public static class UrlConfigBuilder {
         private String url;
-        private int cooldown;
+        private int repeatFrequency;
         private int responseTimeOK;
         private int responseTimeWARNING;
         private int responseTimeCRITICAL;
@@ -122,11 +122,6 @@ public class UrlConfig {
 
         public  UrlConfigBuilder setURL(String url) {
             this.url = url;
-            return this;
-        }
-
-        public UrlConfigBuilder setCooldown(int cooldown) {
-            this.cooldown = cooldown;
             return this;
         }
 
@@ -168,7 +163,7 @@ public class UrlConfig {
         public UrlConfig createUrlConfig() {
             UrlConfig urlConfig = new UrlConfig();
             urlConfig.setUrl(this.url);
-            urlConfig.setCooldown(this.cooldown);
+            urlConfig.setRepeatFrequency(this.repeatFrequency);
             urlConfig.setSubstring(this.substring);
             urlConfig.setExpectedResponseCode(this.expectedResponseCode);
             urlConfig.setMaxResponseLength(this.maxResponseLength);

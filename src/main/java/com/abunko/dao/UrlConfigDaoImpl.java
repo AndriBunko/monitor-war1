@@ -1,7 +1,9 @@
 package com.abunko.dao;
 
+import com.abunko.model.ResultOfAnalysisUrl;
 import com.abunko.model.UrlConfig;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,12 +17,9 @@ public class UrlConfigDaoImpl implements UrlConfigDao {
     @PersistenceContext
     EntityManager entityManager;
 
-    @Override
+    @Transactional
     public void add(UrlConfig urlConfig) {
-        Query query = entityManager.createQuery("insert into UrlConfig (url, cooldown, expectedResponseCode, maxResponseLength, minResponseLength, responseTimeOK, responseTimeWARNING, substring) values ( "+ urlConfig.getUrl() + ", " + urlConfig.getCooldown() +
-                ", " + urlConfig.getResponseTimeOK() + ", " + urlConfig.getResponseTimeWARNING() + ", " + urlConfig.getExpectedResponseCode() +
-                ", " + urlConfig.getMinResponseLength() + ", " + urlConfig.getMaxResponseLength() + ", " + urlConfig.getSubstring() + ")");
-   //     entityManager.persist(urlConfig);
+        entityManager.persist(urlConfig);
     }
 
     @Override
@@ -29,4 +28,16 @@ public class UrlConfigDaoImpl implements UrlConfigDao {
         return query.getResultList();
     }
 
-}
+    @Transactional
+    public UrlConfig getByUrl(String url) {
+        TypedQuery<UrlConfig> query = entityManager.createQuery("SELECT c FROM UrlConfig c WHERE c.url LIKE :url", UrlConfig.class);
+        return query.getSingleResult();
+    }
+
+
+    public void delete(String url) {
+        UrlConfig config = entityManager.getReference(UrlConfig.class, url);
+            entityManager.remove(config);
+        }
+    }
+

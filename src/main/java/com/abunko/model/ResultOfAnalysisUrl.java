@@ -1,6 +1,7 @@
 package com.abunko.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 public class ResultOfAnalysisUrl {
@@ -10,14 +11,13 @@ public class ResultOfAnalysisUrl {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-
     public ResultOfAnalysisUrl() {
     }
 
-    public ResultOfAnalysisUrl(String url, String description, String status) {
+    public ResultOfAnalysisUrl(String url, String description, Status status) {
         this.url = url;
         this.description = description;
-        this.status = Status.valueOf(status);
+        this.status = status;
     }
 
     public String getUrl() {
@@ -32,8 +32,8 @@ public class ResultOfAnalysisUrl {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = Status.valueOf(status);
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public String getDescription() {
@@ -51,5 +51,21 @@ public class ResultOfAnalysisUrl {
                 ", status=" + status +
                 ", description='" + description + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ResultOfAnalysisUrl)) return false;
+        ResultOfAnalysisUrl result = (ResultOfAnalysisUrl) o;
+        return Objects.equals(getUrl(), result.getUrl()) &&
+                Objects.equals(getDescription(), result.getDescription()) &&
+                getStatus() == result.getStatus();
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(getUrl(), getDescription(), getStatus());
     }
 }

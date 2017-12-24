@@ -10,4 +10,5 @@ public interface ResultOfAnalysisUrlDao {
     ResultOfAnalysisUrl getByUrl(String url);
     void delete(String url);
     Long count();
+    void update(ResultOfAnalysisUrl analysisUrl);
 }
