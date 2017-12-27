@@ -17,7 +17,7 @@ public class ExecutorServiceConfig {
     }
 
     @Bean
-    public Map<String, ScheduledFuture<?>> runnableTasks(){
+    public Map<Long, ScheduledFuture<?>> runnableTasks(){
         return new HashMap<>();
     }
 }

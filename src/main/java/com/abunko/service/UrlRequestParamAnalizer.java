@@ -12,47 +12,38 @@ import org.springframework.stereotype.Service;
     public UrlRequestParamAnalizer() {
     }
 
-    public UrlRequestParamAnalizer(UrlConfig config, UrlRequestParam requestParam) {
-        this.config = config;
-        this.requestParam = requestParam;
-    }
-
     @Override
-    public ResultOfAnalysisUrl analize( ) {
-        ResultOfAnalysisUrl result = new ResultOfAnalysisUrl();
-        result.setDescription("all ok");
-        result.setUrl(config.getUrl());
-        result.setStatus(Status.OK);
+    public UrlConfig analize( ) {
         String description;
         while (true) {
             if (responseCodeAnalizer() == Status.CRITICAL) {
-                result.setStatus(Status.CRITICAL);
-                result.setDescription("not expected response code");
+                config.setStatus(Status.CRITICAL);
+                config.setDescription("not expected response code");
                 break;
             }
             if (responseLengthAnalizer() == Status.CRITICAL) {
-                result.setStatus(Status.CRITICAL);
-                result.setDescription("critical respons length");
+                config.setStatus(Status.CRITICAL);
+                config.setDescription("critical respons length");
                 break;
             }
             if (responsTimeAnalizer() == Status.CRITICAL) {
-                result.setStatus(Status.CRITICAL);
-                result.setDescription("critical respons time");
+                config.setStatus(Status.CRITICAL);
+                config.setDescription("critical respons time");
                 break;
             }
             if (responsTimeAnalizer() == Status.WARNING) {
-                result.setStatus(Status.WARNING);
-                result.setDescription("big respons time");
+                config.setStatus(Status.WARNING);
+                config.setDescription("big respons time");
                 break;
             }
             if (substringAnalizer() == Status.WARNING) {
-                result.setStatus(Status.WARNING );
-                result.setDescription("does not contain substrings");
+                config.setStatus(Status.WARNING );
+                config.setDescription("does not contain substrings");
                 break;
             }
             break;
         }
-        return result;
+        return config;
     }
 
     private Status responseLengthAnalizer() {
@@ -77,16 +68,8 @@ import org.springframework.stereotype.Service;
         return status;
     }
 
-    public UrlRequestParam getRequestParam() {
-        return requestParam;
-    }
-
     public void setUrlRequestParam(UrlRequestParam requestParam) {
         this.requestParam = requestParam;
-    }
-
-    public UrlConfig getConfig() {
-        return config;
     }
 
     public void setUrlConfig(UrlConfig config) {

@@ -1,19 +1,37 @@
 package com.abunko.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.validator.constraints.URL;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class UrlConfig {
     @Id
+    @GeneratedValue
+    private long id;
+    @NotNull
+    @URL
     private String url;
+    @NotNull
+    @Size(min = 10)
     private int repeatFrequency;
+    @NotNull
     private int responseTimeOK;
+    @NotNull
     private int responseTimeWARNING;
+    @NotNull
     private int expectedResponseCode;
+    @NotNull
     private int minResponseLength;
+    @NotNull
     private int maxResponseLength;
+    @NotNull
     private String substring;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+    private String description;
 
     public UrlConfig() {
     }
@@ -27,6 +45,16 @@ public class UrlConfig {
         this.minResponseLength = minResponseLength;
         this.maxResponseLength = maxResponseLength;
         this.substring = substring;
+        this.status = Status.OK;
+        this.description = "All ok";
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getUrl() {
@@ -52,7 +80,6 @@ public class UrlConfig {
     public void setResponseTimeOK(int responseTimeOK) {
         this.responseTimeOK = responseTimeOK;
     }
-
 
     public int getResponseTimeWARNING() {
         return responseTimeWARNING;
@@ -94,6 +121,22 @@ public class UrlConfig {
         this.substring = substring;
     }
 
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public String toString() {
         return "UrlConfig{" +
@@ -108,70 +151,4 @@ public class UrlConfig {
                 '}';
     }
 
-/*    public static class UrlConfigBuilder {
-        private String url;
-        private int repeatFrequency;
-        private int responseTimeOK;
-        private int responseTimeWARNING;
-        private int responseTimeCRITICAL;
-        private int expectedResponseCode;
-        private int minResponseLength;
-        private int maxResponseLength;
-        private String substring;
-
-
-        public  UrlConfigBuilder setURL(String url) {
-            this.url = url;
-            return this;
-        }
-
-        public UrlConfigBuilder setResponseTimeOK(int responseTimeOK) {
-            this.responseTimeOK = responseTimeOK;
-            return this;
-        }
-
-        public UrlConfigBuilder setResponseTimeWARNING(int responseTimeWARNING) {
-            this.responseTimeWARNING = responseTimeWARNING;
-            return this;
-        }
-
-        public UrlConfigBuilder setResponseTimeCRITICAL(int responseTimeCRITICAL) {
-            this.responseTimeCRITICAL = responseTimeCRITICAL;
-            return this;
-        }
-
-        public UrlConfigBuilder setExpectedResponseCode(int expectedResponseCode) {
-            this.expectedResponseCode = expectedResponseCode;
-            return this;
-        }
-
-        public UrlConfigBuilder setMinResponseLength(int minResponseLength) {
-            this.minResponseLength = minResponseLength;
-            return this;
-        }
-
-        public UrlConfigBuilder setMaxResponseLength(int maxResponseLength) {
-            this.maxResponseLength = maxResponseLength;
-            return this;
-        }
-
-        public UrlConfigBuilder setSubstring(String substring) {
-            this.substring = substring;
-            return this;
-        }
-
-        public UrlConfig createUrlConfig() {
-            UrlConfig urlConfig = new UrlConfig();
-            urlConfig.setUrl(this.url);
-            urlConfig.setRepeatFrequency(this.repeatFrequency);
-            urlConfig.setSubstring(this.substring);
-            urlConfig.setExpectedResponseCode(this.expectedResponseCode);
-            urlConfig.setMaxResponseLength(this.maxResponseLength);
-            urlConfig.setMinResponseLength(this.minResponseLength);
-            urlConfig.setResponseTimeOK(this.responseTimeOK);
-            urlConfig.setResponseTimeWARNING(this.responseTimeWARNING);
-            urlConfig.setResponseTimeCRITICAL(this.responseTimeCRITICAL);
-            return urlConfig;
-        }
-    }*/
 }

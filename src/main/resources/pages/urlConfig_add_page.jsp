@@ -19,7 +19,8 @@
                         <input class="form-control form-group" type="number" name="minResponseLength" placeholder="min esponse length in byte">
                         <input class="form-control form-group" type="number" name="responseCode" placeholder="expected response code">
                         <input class="form-control form-group" type="number" name="repeatFrequency" placeholder="repeat frequency in second">
-                    <input type="submit" class="btn btn-primary" value="Add">
+                        <p>${string}</p>
+                        <input type="submit" class="btn btn-primary" value="Add">
             </form>
         </div>
 

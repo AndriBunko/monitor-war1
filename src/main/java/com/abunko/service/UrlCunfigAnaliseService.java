@@ -1,18 +1,16 @@
 package com.abunko.service;
 
-import com.abunko.model.ResultOfAnalysisUrl;
 import com.abunko.model.UrlConfig;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
  public interface UrlCunfigAnaliseService {
-    void addResultUrlConfig(UrlConfig urlConfig) throws ExecutionException, InterruptedException;
+    void addResultUrlConfig(UrlConfig urlConfig);
     void addUrlConfig(UrlConfig urlConfig);
     List<UrlConfig> listUrlConfigs();
-    List<ResultOfAnalysisUrl> listResultOfAnalysis();
-    void delete(String [] ids);
+    void delete(long [] ids);
     Long count();
-    void stop(String url);
-    void run(String url) ;
+    void stop(long id);
+    void run(long id) ;
 
 }

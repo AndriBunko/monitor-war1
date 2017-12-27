@@ -41,13 +41,13 @@
                 </thead>
                 <c:forEach items="${urlResults}" var="urlResult">
                     <tr class="${urlResult.status}">
-                        <td><input type="checkbox" name="toDelete[]" value="${urlResult.url}" id="checkbox_${urlResult.url}"/></td>
+                        <td><input type="checkbox" name="toDelete[]" value="${urlResult.id}" id="checkbox_${urlResult.id}"/></td>
                         <td>${urlResult.url}</td>
                         <td>${urlResult.status}</td>
                         <td>${urlResult.description}</td>
                         <%--<button type="button" id="stop_url_${urlResult.url}" class="btn btn-default navbar-btn" value="${urlResult.url}">Stop_url</button>--%>
-                        <td><input type="submit"  class="btn btn-default navbar-btn" value="Stop" onclick="window.location='/stop/${urlResult.url}'"></td>
-                        <td><input type="submit"  class="btn btn-default navbar-btn" value="Run" onclick="window.location='/run/${urlResult.url}'"></input></td>
+                        <td><input type="submit"  class="btn btn-default navbar-btn" value="Stop" onclick="window.location='/stop/${urlResult.id}'"></td>
+                        <td><input type="submit"  class="btn btn-default navbar-btn" value="Run" onclick="window.location='/run/${urlResult.id}'"></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -63,7 +63,7 @@
 
         <script>
 
-            $('.dropdown-toggle').dropdown();
+            setTimeout(function() {  window.location.href='/'}, 40000);
 
             $('#add_url').click(function(){
                 window.location.href='/urlConfig_add_page';
