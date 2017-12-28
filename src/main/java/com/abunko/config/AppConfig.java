@@ -38,7 +38,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory
-            (DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
+            (BasicDataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
         Properties jpaProp = new Properties();
         jpaProp.put("hibernate.hbm2ddl.auto", "create-drop");
 
