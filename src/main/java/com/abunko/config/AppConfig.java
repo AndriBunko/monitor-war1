@@ -97,11 +97,5 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         resolver.setOrder(1);
         return resolver;
     }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry
-                .addResourceHandler("/static/**")
-                .addResourceLocations("/static/");
-    }
+    
 }
