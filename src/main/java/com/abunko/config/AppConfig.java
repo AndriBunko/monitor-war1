@@ -97,5 +97,5 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         resolver.setOrder(1);
         return resolver;
     }
-    
+
 }
