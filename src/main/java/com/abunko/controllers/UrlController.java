@@ -37,7 +37,7 @@ public class UrlController {
         model.addAttribute("urlResults", urlCunfigAnaliseService.listUrlConfigs());
         model.addAttribute("pages", pageCount);
 
-        return "index";
+        return "hello.html";
     }
 
     @RequestMapping("/urlConfig_add_page")
