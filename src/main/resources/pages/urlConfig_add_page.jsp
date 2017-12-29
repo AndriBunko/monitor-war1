@@ -16,7 +16,7 @@
                         <input class="form-control form-group" type="number" name="timeWarning" placeholder="respons time Warning">
                         <input class="form-control form-group" type="text" name="substring" placeholder="substring">
                         <input class="form-control form-group" type="number" name="maxResponseLength" placeholder="max response length in byte">
-                        <input class="form-control form-group" type="number" name="minResponseLength" placeholder="min esponse length in byte">
+                        <input class="form-control form-group" type="number" name="minResponseLength" placeholder="min response length in byte">
                         <input class="form-control form-group" type="number" name="responseCode" placeholder="expected response code">
                         <input class="form-control form-group" type="number" name="repeatFrequency" placeholder="repeat frequency in second">
                         <p>${string}</p>

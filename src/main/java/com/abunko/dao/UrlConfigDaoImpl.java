@@ -37,9 +37,7 @@ public class UrlConfigDaoImpl implements UrlConfigDao {
 
     @Transactional
     public UrlConfig getById(long id) {
-        TypedQuery<UrlConfig> query = entityManager.createQuery("SELECT c FROM UrlConfig c WHERE c.id LIKE :id", UrlConfig.class);
-        System.out.println(query.getSingleResult());
-        return query.getSingleResult();
+       return entityManager.find(UrlConfig.class, id);
     }
 
     @Transactional

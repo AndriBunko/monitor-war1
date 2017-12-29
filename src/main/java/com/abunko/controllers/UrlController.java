@@ -70,15 +70,19 @@ public class UrlController {
 
     @RequestMapping("/stop/{urlConfig.id}")
     public String onStope(Model model, @PathVariable("urlConfig.id") long id) {
-        urlCunfigAnaliseService.stop(id);
+        try {
+            urlCunfigAnaliseService.stop(id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         return "redirect:/";
     }
 
     @RequestMapping("/run/{urlConfig.id}")
     public String onRun(Model model, @PathVariable("urlConfig.id") long id) {
-        System.out.println(id);
+        System.out.println(id);//тут виводиться 1
         urlConfigDao.getById(id);
-        urlCunfigAnaliseService.run(id);
+        urlCunfigAnaliseService.run(1);
         return "redirect:/";
     }
 }
