@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="heroku_ee1ddae7c2f7129@eu-cdbr-west-01.cleardb.com" uuid="6c0833a0-e2e8-4b5f-87d3-8af535741c5e">
-      <driver-ref>mysql</driver-ref>
+    <data-source source="LOCAL" name="dsdplsglbvuqn@ec2-54-217-205-90.eu-west-1.compute.amazonaws.com" uuid="30acd442-2b41-4aae-99aa-31f0c981e351">
+      <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
-      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://eu-cdbr-west-01.cleardb.com:3306/heroku_ee1ddae7c2f7129?reconnect=true</jdbc-url>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://ec2-54-217-205-90.eu-west-1.compute.amazonaws.com:5432/dsdplsglbvuqn</jdbc-url>
       <driver-properties>
-        <property name="autoReconnect" value="true" />
-        <property name="zeroDateTimeBehavior" value="convertToNull" />
-        <property name="tinyInt1isBit" value="false" />
-        <property name="characterEncoding" value="utf8" />
-        <property name="characterSetResults" value="utf8" />
-        <property name="yearIsDateType" value="false" />
+        <property name="ApplicationName" value="DataGrip" />
       </driver-properties>
     </data-source>
   </component>
