@@ -1,10 +1,8 @@
 package com.abunko.config;
 
-import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -19,8 +17,6 @@ import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.Properties;
 
 @Configuration
@@ -36,7 +32,7 @@ public class AppConfig extends WebMvcConfigurerAdapter{
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory
-            (BasicDataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
+            (DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
         Properties jpaProp = new Properties();
         jpaProp.put("hibernate.hbm2ddl.auto", "create-drop");
 
@@ -54,38 +50,21 @@ public class AppConfig extends WebMvcConfigurerAdapter{
         HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
         adapter.setShowSql(true);
         adapter.setGenerateDdl(true);
-        adapter.setDatabasePlatform("org.hibernate.dialect.PostgreSQLDialect");
+        adapter.setDatabasePlatform("org.hibernate.dialect.MySQLDialect");
 
         return adapter;
     }
 
-//    @Bean
-//    public DataSource dataSource() {
-//        DriverManagerDataSource ds = new DriverManagerDataSource();
-//        ds.setDriverClassName("org.postgresql.Driver");
-//        ds.setUrl("jdbc:postgresql://ec2-54-217-205-90.eu-west-1.compute.amazonaws.com:5432/dsdplsglbvuqn");
-//        ds.setUsername("fhjskvbenvsobz");
-//        ds.setPassword("a567114659aeca66c82852a9c3c081807ba2c4134573e92ff92d8de5d083ffdc");
-//
-//        return ds;
-//    }
-
     @Bean
-    public BasicDataSource dataSource() throws URISyntaxException {
-        URI dbUri = new URI(System.getenv("DATABASE_URL"));
+    public DataSource dataSource() {
+        DriverManagerDataSource ds = new DriverManagerDataSource();
+        ds.setDriverClassName("com.mysql.jdbc.Driver");
+        ds.setUrl("jdbc:mysql://localhost:3306/monitor");
+        ds.setUsername("root");
+        ds.setPassword("password");
 
-        String username = dbUri.getUserInfo().split(":")[0];
-        String password = dbUri.getUserInfo().split(":")[1];
-        String dbUrl = "jdbc:postgresql://" + dbUri.getHost() + ':' + dbUri.getPort() + dbUri.getPath();
-
-        BasicDataSource basicDataSource = new BasicDataSource();
-        basicDataSource.setUrl(dbUrl);
-        basicDataSource.setUsername(username);
-        basicDataSource.setPassword(password);
-
-        return basicDataSource;
+        return ds;
     }
-
 
     @Bean
     public UrlBasedViewResolver setupViewResolver() {

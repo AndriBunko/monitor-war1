@@ -1,5 +1,6 @@
 package com.abunko.controllers;
 
+import com.abunko.dao.UrlConfigDao;
 import com.abunko.model.UrlConfig;
 import com.abunko.service.UrlCunfigAnaliseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class UrlController {
 
     @Autowired
     private UrlCunfigAnaliseService urlCunfigAnaliseService;
+    @Autowired
+    private UrlConfigDao urlConfigDao;
 
     @RequestMapping("/")
     public String index(Model model,  @RequestParam(required = false, defaultValue = "0") Integer page ) {
@@ -37,7 +40,7 @@ public class UrlController {
         model.addAttribute("urlResults", urlCunfigAnaliseService.listUrlConfigs());
         model.addAttribute("pages", pageCount);
 
-        return "hello.html";
+        return "index";
     }
 
     @RequestMapping("/urlConfig_add_page")
@@ -73,6 +76,8 @@ public class UrlController {
 
     @RequestMapping("/run/{urlConfig.id}")
     public String onRun(Model model, @PathVariable("urlConfig.id") long id) {
+        System.out.println(id);
+        urlConfigDao.getById(id);
         urlCunfigAnaliseService.run(id);
         return "redirect:/";
     }

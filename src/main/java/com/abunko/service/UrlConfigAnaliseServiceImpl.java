@@ -53,9 +53,7 @@ public class UrlConfigAnaliseServiceImpl implements UrlCunfigAnaliseService {
     }
 
     public void addResultUrlConfig(UrlConfig urlConfig){
-        System.out.println("in add");
         ScheduledFuture<?> schedule = scheduler.scheduleAtFixedRate(() -> doAddAndAnaliseUrlConfig(urlConfig), 0, urlConfig.getRepeatFrequency(), TimeUnit.SECONDS);
-        System.out.println("after add");
         runnableTasks.put(urlConfig.getId(), schedule);
         System.out.println(runnableTasks.keySet());
     }
